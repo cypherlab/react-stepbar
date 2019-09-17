@@ -1,6 +1,6 @@
 {
   "name": "@cypherlab/react-stepbar",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Stepbar component for tunnel like ux's",
   "author": "Louis Grellet <louis.grellet@gmail.com>",
   "license": "ISC",
