@@ -1,6 +1,6 @@
 {
   "name": "@cypherlab/react-stepbar",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Visual steps bar for tunnel like experiences",
   "author": "Louis Grellet <louis.grellet@gmail.com>",
   "license": "ISC",
