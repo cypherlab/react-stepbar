@@ -1,11 +1,19 @@
 # `@cypherlab/react-stepbar`
 
+<p align="center">
+  <img width="444" alt="screenshot" src="https://user-images.githubusercontent.com/503577/65076308-047c7600-d999-11e9-8225-89a8193bfc5b.png">
+</p>
 
-Visual steps bar for tunnel like experiences  
+<p align="center">
+  Stepbar component for tunnel like ux's.
+</p>
+<p align="center">
+  <a href="https://www.npmjs.com/package/@cypherlab/react-stepbar">
+    <img alt="npm" src="https://img.shields.io/npm/v/@cypherlab/react-stepbar">
+  </a>
+  <img alt="NPM badge" src="https://img.shields.io/npm/l/@cypherlab/react-stepbar">
+</p>
 
-<a href="https://www.npmjs.com/package/@cypherlab/react-stepbar">
-  <img alt="npm" src="https://img.shields.io/npm/v/@cypherlab/react-stepbar">
-</a>
 
 ## Install
 ```

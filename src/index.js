@@ -43,10 +43,12 @@ class StepBar extends React.Component {
   }
 
   componentDidMount() {
+    console.log('mount')
     this.props.onRef&&this.props.onRef(this)
   }
 
   componentWillUnmount() {
+    console.log('ici')
     this.props.onRef&&this.props.onRef(undefined)
   }
 
@@ -74,15 +76,16 @@ class StepBar extends React.Component {
     const width = currentStep * ratio
     const onStepClick = onClick || ((step, setStep) => { setStep(step) })
     const css = getTheme(theme)
+    console.log('render')
 
     return (<div>
 
-      <div className="step-crumbs">
+      <div className="stepbar">
         <div className="dots">
           { steps.map((step, stepIndex) => (<div onClick={()=>onStepClick(stepIndex, this.setStep)} key={stepIndex}>
             <div className="backdot"> </div>
             <div className={`dot ${stepIndex<=currentStep?'active':''}`}> </div>
-            { label != false && <div className="dot-label">
+            { label != false && <div className="label">
               {label ? label(step, stepIndex) : (<small>{step}</small>)}
             </div>}
           </div>))}
@@ -94,29 +97,26 @@ class StepBar extends React.Component {
 
 
       <style jsx>{`
-        .step-crumbs {
+        .stepbar {
           position: relative;
           z-index: 2;
         }
-
-        .dots {
+        .stepbar .dots {
           display: flex!important;
           justify-content: space-between!important;
         }
-        .dots > div {
+        .stepbar .dots > div {
           cursor: pointer;
         }
-
-        .backdot {
+        .stepbar .label {
           position: absolute;
-          z-index: -1;
-          margin-left: -${css.backdot.width/2}px;
-          height: ${css.backdot.width}px;
-          width: ${css.backdot.width}px;
-          background: ${css.backdot.color};
-          border-radius: 50%;
+          top: -35px;
+          margin-left: -${css.label.width/2}px;
+          width: 100px;
+          font-size: ${css.label.fontSize}px;
+          color: ${css.label.color};
         }
-        .dot {
+        .stepbar .dot {
           background: ${css.dot.color};
           width: ${css.dot.width}px;
           height: ${css.dot.width}px;
@@ -125,31 +125,22 @@ class StepBar extends React.Component {
           margin-top: ${(css.backdot.width/2)-(css.dot.width/2)};
           // border: 2px solid #fff;
         }
-        .dot:hover {
+        .stepbar .dot:hover {
           background: ${css.dot.hover};
         }
-        .dot.active {
+        .stepbar .dot.active {
           background: ${css.dot.active};
         }
-        .dot-label {
+        .stepbar .backdot {
           position: absolute;
-          top: -35px;
-          margin-left: -${css.label.width/2}px;
-          width: 100px;
-          font-size: ${css.label.fontSize}px;
-          color: ${css.label.color};
+          z-index: -1;
+          margin-left: -${css.backdot.width/2}px;
+          height: ${css.backdot.width}px;
+          width: ${css.backdot.width}px;
+          background: ${css.backdot.color};
+          border-radius: 50%;
         }
-
-        .backbar {
-          z-index: -2;
-          position: absolute;
-          top: ${(css.backdot.width/2)-(css.backbar.height/2)};
-          height: ${css.backbar.height}px;
-          width: 100%;
-          border-radius: 10px;
-          background: ${css.backbar.color};
-        }
-        .bar {
+        .stepbar .bar {
           z-index: -1;
           position: absolute;
           top: ${(css.backdot.width/2)-(css.bar.height/2)};
@@ -160,8 +151,15 @@ class StepBar extends React.Component {
               -o-transition: width 1s ease;
                  transition: width 1s ease;
         }
-
-
+        .stepbar .backbar {
+          z-index: -2;
+          position: absolute;
+          top: ${(css.backdot.width/2)-(css.backbar.height/2)};
+          height: ${css.backbar.height}px;
+          width: 100%;
+          border-radius: 10px;
+          background: ${css.backbar.color};
+        }
       `}</style>
 
     </div>)
@@ -188,6 +186,7 @@ export const Playground = (props) => {
       theme={theme} 
       label={label?undefined:false}
       onRef={ref => {
+        console.log('ooo')
         StepBarRef = ref
         props.onRef&&props.onRef(ref) // forward onRef
       }}
@@ -203,6 +202,7 @@ export const Playground = (props) => {
         <option value={true}>label: true</option>
         <option value={false}>label: false</option>
       </select>
+      <a href="javascript:" onClick={()=>console.log(StepBarRef)} className="d-block btn btn-sm btn-light mb-2">setStep('initital')</a>
       <a href="javascript:" onClick={()=>StepBarRef.setStep('initital')} className="d-block btn btn-sm btn-light mb-2">setStep('initital')</a>
       <a href="javascript:" onClick={()=>StepBarRef.setStep()} className="d-block btn btn-sm btn-light mb-2">setStep()</a>
       <a href="javascript:" onClick={()=>StepBarRef.setStep(-1)} className="d-block btn btn-sm btn-light mb-2">setStep(-1)</a>
