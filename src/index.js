@@ -25,19 +25,18 @@ const getTheme = (name="light") => {
   return css
 }
 
-class StepCrumbs extends React.Component {
+class StepBar extends React.Component {
 
   constructor(props){
     super(props)
 
-    const { currentStep, initialSteps, steps } = props
+    const { currentStep, initialStep, steps } = props
 
     this.state = { 
-        initialSteps: initialSteps || 0
-      , currentStep: currentStep || initialSteps || 0
+        initialStep: initialStep || 0
+      , currentStep: currentStep || initialStep || 0
       , steps: steps || ['Cart', 'Shipping', 'Payment']
       , theme: 'light'
-      // , steps: steps || [0, 1, 2, 3, 4]
     }
 
     this.setStep = this.setStep.bind(this)
@@ -51,10 +50,21 @@ class StepCrumbs extends React.Component {
     this.props.onRef&&this.props.onRef(undefined)
   }
 
-  setStep(stepIndex) {
+  // setStep() // next
+  // setStep(-1) // previous
+  // setStep(0,1,...) // specific
+  // setStep('initial') // initial step
+  setStep(index) {
+    const { currentStep, initialStep } = this.state
     const { steps } = this.props
-    this.setState({ currentStep: stepIndex })
-    this.props.onStep && this.props.onStep(steps[stepIndex], stepIndex)
+    let step
+
+    if(!isNaN(index)) step = index == -1 ? currentStep-1 < 0 ? 0 : currentStep-1 : index
+    else if(index == 'initital') step = initialStep
+    else step = currentStep+1 >= steps.length ? 0 : currentStep+1
+
+    this.setState({ currentStep: step })
+    // this.props.onStep && this.props.onStep(steps[stepIndex], stepIndex)
   }
 
   render() {
@@ -160,35 +170,42 @@ class StepCrumbs extends React.Component {
 
 
 
-export default StepCrumbs
+export default StepBar
 
 
 
 
-export const Playground = ({ steps, theme='light' } = {}) => {
+export const Playground = (props) => {
 
   const themes = ['light', 'dark']
-  const [currentTheme, setTheme] = React.useState(theme)
+  const [theme, setTheme] = React.useState('light')
   const [label, setLabel] = React.useState(true)
+  let StepBarRef
 
   return (<div>
     
-    <StepCrumbs
-      steps={steps}
-      label={label ? undefined : false}
-      theme={currentTheme}
+    <StepBar {...props} 
+      theme={theme} 
+      label={label?undefined:false}
+      onRef={ref => {
+        StepBarRef = ref
+        props.onRef&&props.onRef(ref) // forward onRef
+      }}
     />
 
-    <div className="py-5">
-      <select className="mr-2" onChange={e=>setTheme(e.target.value)} value={currentTheme}>
+    <div className="py-5 col-4 m-auto">
+      <select className="custom-select custom-select-sm mb-2" onChange={e=>setTheme(e.target.value)} value={theme}>
         { themes.map(t => (
           <option value={t}>theme: {t}</option>
         )) }
       </select>
-      <select className="mr-2"  onChange={e=>setLabel(e.target.value === 'true' ? true:false)} value={label}>
+      <select className="custom-select custom-select-sm mb-2"  onChange={e=>setLabel(e.target.value === 'true' ? true:false)} value={label}>
         <option value={true}>label: true</option>
         <option value={false}>label: false</option>
       </select>
+      <a href="javascript:" onClick={()=>StepBarRef.setStep('initital')} className="d-block btn btn-sm btn-light mb-2">setStep('initital')</a>
+      <a href="javascript:" onClick={()=>StepBarRef.setStep()} className="d-block btn btn-sm btn-light mb-2">setStep()</a>
+      <a href="javascript:" onClick={()=>StepBarRef.setStep(-1)} className="d-block btn btn-sm btn-light mb-2">setStep(-1)</a>
     </div>
 
   </div>)

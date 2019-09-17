@@ -19,7 +19,7 @@ export default [
         babel(),
         resolve(),
         commonjs(),
-        // terser(),
+        terser(),
         dev && serve({ contentBase: ['.'], open: true }),
         dev && livereload()
       ]

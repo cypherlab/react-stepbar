@@ -21,14 +21,17 @@ See [Code example](https://github.com/cypherlab/react-stepbar/blob/master/index.
 ```js
 import StepBar from '@cypherlab/react-stepbar'
 
-// create some trans
 const props = {
     steps: ['Cart', 'Shipping', 'Recap', 'Payment']
   , theme: 'dark' 
+  , onRef: ref => (window['myStepBar'] = ref)
 }
 
 // render
 <StepBar {...props} />
+
+// ref usage
+window['myStepBar'].setStep(3)
 ```
 
 
@@ -38,8 +41,15 @@ const props = {
 | option        | info                                                            |
 |---------------|-----------------------------------------------------------------|
 | steps         | steps data. array of anything. required                         |
+| onRef         |                                                                 |
 | onStep        |                                                                 |
 | theme         | predefined theme                                                |
+
+## Methods
+
+| option        | info                                                            |
+|---------------|-----------------------------------------------------------------|
+| setStep       |   |
 
 
 

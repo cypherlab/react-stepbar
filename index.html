@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>react-step-crumbs</title>
+    <title>react-stepbar</title>
     <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
     <link href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -17,17 +17,17 @@
 
       (async () => {
 
-        const MyComponent = await esmImport([ 
+        const StepbarPlayground = await esmImport([ 
             `${document.location.origin}/dist/index.js`
           , 'https://unpkg.com/@cypherlab/react-stepbar'
         ], 'Playground')
 
         const props = {
             steps: ['Cart', 'Shipping', 'Recap', 'Payment']
-          , theme: 'dark' 
+          , theme: 'dark'
         }
         
-        ReactDOM.render(React.createElement(MyComponent, props), document.getElementById('root'))
+        ReactDOM.render(React.createElement(StepbarPlayground, props), document.getElementById('root'))
 
       })()
 
