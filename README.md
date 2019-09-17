@@ -38,6 +38,7 @@ const props = {
 | option        | info                                                            |
 |---------------|-----------------------------------------------------------------|
 | steps         | steps data. array of anything. required                         |
+| onStep        |                                                                 |
 | theme         | predefined theme                                                |
 
 
