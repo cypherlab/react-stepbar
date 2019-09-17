@@ -13,7 +13,7 @@
     "dev": "NODE_ENV=dev npm run watch",
     "build": "npx rollup -c",
     "prepare": "npm run build",
-    "release": "np --no-publish --skip-cleanup --no-tests --no-release-draft"
+    "release": "np"
   },
   "files": [
     "dist",
