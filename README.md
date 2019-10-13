@@ -1,3 +1,5 @@
+[DEPRECATED] check https://github.com/cypherlab/react-flow
+
 # `@cypherlab/react-stepbar`
 
 <p align="center">
